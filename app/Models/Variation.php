@@ -4,9 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class User extends Model
+class Variation extends Model
 {
     use HasFactory;
 
@@ -16,18 +17,10 @@ class User extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
-
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password',
+        'product_id',
+        'attribute_1',
+        'attribute_2',
+        'price',
     ];
 
     /**
@@ -37,6 +30,7 @@ class User extends Model
      */
     protected $casts = [
         'id' => 'integer',
+        'product_id' => 'integer',
     ];
 
     public function carts(): HasMany
@@ -44,13 +38,8 @@ class User extends Model
         return $this->hasMany(Cart::class);
     }
 
-    public function transactions(): HasMany
+    public function product(): BelongsTo
     {
-        return $this->hasMany(Transaction::class);
-    }
-
-    public function shippingAddresses(): HasMany
-    {
-        return $this->hasMany(ShippingAddress::class);
+        return $this->belongsTo(Product::class);
     }
 }

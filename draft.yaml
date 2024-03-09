@@ -1,28 +1,34 @@
 models:
-  Store:
-    user_id : foreign
+  User:
     name: string
-    slug: string
-    description : text
+    email: unique
+    password: string
+    relationships:
+      hasMany: Cart, Transaction, ShippingAddress
 
   Category:
     name: string
     slug: string
+    relationships:
+      hasMany: Product
 
   Product:
-    store_id: foreign
     category_id: foreign
+    picture: foreign
     name: string
     slug: string
     description: text
     price: text
-  
-  Variantion:
+    relationships:
+      hasMany: Variation
+
+  Variation:
     product_id: foreign
-    picture: foreign
     attribute_1: string
     attribute_2: string
     price: integer
+    relationships:
+      hasMany: Cart
   
   Cart:
     user_id: foreign
@@ -36,21 +42,22 @@ models:
     user_id: foreign
     gross_amount: integer
     shipping_information: string
-    merchant_id: string
-    payment_method: string
-    status_message: string
-    transaction_id: string
-    transaction_status: string
-    transaction_time: datetime
-    settlement_time: datetime
-    expiry_time: datetime
-    fraud_status: string
-    order_status: integer
+    # merchant_id: string
+    # payment_method: string
+    # status_message: string
+    # transaction_id: string
+    # transaction_status: string
+    # transaction_time: datetime
+    # settlement_time: datetime
+    # expiry_time: datetime
+    # fraud_status: string
+    # order_status: integer
 
-  Shipping_address:
+  ShippingAddress:
     user_id: foreign
     address1: string
     address2: string
     is_default: string
-  
+    relationships:
+        hasOne: Transcation
 
