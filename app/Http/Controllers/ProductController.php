@@ -12,7 +12,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        return Product::get();
     }
 
     /**
@@ -28,7 +28,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+       return $product;
     }
 
     /**
