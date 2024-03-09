@@ -1,25 +1,3 @@
-created:
-    - database/factories/UserFactory.php
-    - database/factories/CategoryFactory.php
-    - database/factories/ProductFactory.php
-    - database/factories/VariationFactory.php
-    - database/factories/CartFactory.php
-    - database/factories/TranscationFactory.php
-    - database/factories/ShippingAddressFactory.php
-    - database/migrations/2024_03_09_070044_create_users_table.php
-    - database/migrations/2024_03_09_070045_create_categories_table.php
-    - database/migrations/2024_03_09_070046_create_products_table.php
-    - database/migrations/2024_03_09_070047_create_variations_table.php
-    - database/migrations/2024_03_09_070048_create_carts_table.php
-    - database/migrations/2024_03_09_070049_create_transcations_table.php
-    - database/migrations/2024_03_09_070050_create_shipping_addresses_table.php
-    - app/Models/User.php
-    - app/Models/Category.php
-    - app/Models/Product.php
-    - app/Models/Variation.php
-    - app/Models/Cart.php
-    - app/Models/Transcation.php
-    - app/Models/ShippingAddress.php
 models:
     User: { name: string, email: unique, password: string, relationships: { hasMany: 'Cart, Transaction, ShippingAddress' } }
     Category: { name: string, slug: string, relationships: { hasMany: Product } }
