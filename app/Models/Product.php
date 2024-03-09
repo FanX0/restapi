@@ -16,6 +16,13 @@ class Product extends Model
      *
      * @var array
      */
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+
     protected $fillable = [
         'category_id',
         'picture',
