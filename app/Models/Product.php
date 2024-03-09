@@ -33,7 +33,6 @@ class Product extends Model
     protected $casts = [
         'id' => 'integer',
         'category_id' => 'integer',
-        'picture' => 'integer',
     ];
 
     public function variations(): HasMany
@@ -44,10 +43,5 @@ class Product extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
-    }
-
-    public function picture(): BelongsTo
-    {
-        return $this->belongsTo(Picture::class);
     }
 }

@@ -5,7 +5,6 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use App\Models\Category;
-use App\Models\Picture;
 use App\Models\Product;
 
 class ProductFactory extends Factory
@@ -22,9 +21,15 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
+
+          // Generate a random number between 1 and 1000 for picture ID
+    $pictureId = $this->faker->numberBetween(1, 1000);
+
+    // Construct a random URL for the picture using Lorem Picsum service
+    $pictureUrl = "https://picsum.photos/id/{$pictureId}/200/300";
         return [
             'category_id' => Category::factory(),
-            'picture' => Picture::factory(),
+            'picture' => $pictureUrl, // Set the picture attribute to the generated URL
             'name' => $this->faker->name(),
             'slug' => $this->faker->slug(),
             'description' => $this->faker->text(),
