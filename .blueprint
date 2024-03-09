@@ -6,13 +6,13 @@ created:
     - database/factories/CartFactory.php
     - database/factories/TransactionFactory.php
     - database/factories/ShippingAddressFactory.php
-    - database/migrations/2024_03_09_080046_create_users_table.php
-    - database/migrations/2024_03_09_080047_create_categories_table.php
-    - database/migrations/2024_03_09_080048_create_products_table.php
-    - database/migrations/2024_03_09_080049_create_variations_table.php
-    - database/migrations/2024_03_09_080050_create_carts_table.php
-    - database/migrations/2024_03_09_080051_create_transactions_table.php
-    - database/migrations/2024_03_09_080052_create_shipping_addresses_table.php
+    - database/migrations/2024_03_09_095245_create_users_table.php
+    - database/migrations/2024_03_09_095246_create_categories_table.php
+    - database/migrations/2024_03_09_095247_create_products_table.php
+    - database/migrations/2024_03_09_095248_create_variations_table.php
+    - database/migrations/2024_03_09_095249_create_carts_table.php
+    - database/migrations/2024_03_09_095250_create_transactions_table.php
+    - database/migrations/2024_03_09_095251_create_shipping_addresses_table.php
     - app/Models/User.php
     - app/Models/Category.php
     - app/Models/Product.php
@@ -23,7 +23,7 @@ created:
 models:
     User: { name: string, email: unique, password: string, relationships: { hasMany: 'Cart, Transaction, ShippingAddress' } }
     Category: { name: string, slug: string, relationships: { hasMany: Product } }
-    Product: { category_id: foreign, picture: foreign, name: string, slug: string, description: text, price: text, relationships: { hasMany: Variation } }
+    Product: { category_id: foreign, picture: string, name: string, slug: string, description: text, price: text, relationships: { hasMany: Variation } }
     Variation: { product_id: foreign, attribute_1: string, attribute_2: string, price: integer, relationships: { hasMany: Cart } }
     Cart: { user_id: foreign, variation_id: foreign, quantity: integer, price: integer, placed_at: 'nullable timestamp' }
     Transcation: { order_id: string, user_id: foreign, gross_amount: integer, shipping_information: string }
