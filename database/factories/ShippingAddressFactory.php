@@ -25,7 +25,7 @@ class ShippingAddressFactory extends Factory
             'user_id' => User::factory(),
             'address1' => $this->faker->streetAddress(),
             'address2' => $this->faker->secondaryAddress(),
-            'is_default' => $this->faker->word(),
+            'is_default' => $this->faker->boolean(),
         ];
     }
 }
