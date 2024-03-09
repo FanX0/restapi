@@ -14,7 +14,7 @@ models:
 
   Product:
     category_id: foreign
-    picture: foreign
+    picture: string
     name: string
     slug: string
     description: text
