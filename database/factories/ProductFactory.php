@@ -30,8 +30,8 @@ class ProductFactory extends Factory
         return [
             'category_id' => Category::factory(),
             'picture' => $pictureUrl, // Set the picture attribute to the generated URL
-            'name' => $this->faker->name(),
-            'slug' => $this->faker->slug(),
+            'name' => $name = $this->faker->name(),
+            'slug' => Str::slug($name),
             'description' => $this->faker->text(),
             'price' => $this->faker->text(),
         ];
