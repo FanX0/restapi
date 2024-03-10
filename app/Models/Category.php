@@ -15,6 +15,16 @@ class Category extends Model
      *
      * @var array
      */
+
+    public function toArray()
+    {
+        return[
+            'id' => $this->id,
+            'name' => $this->name,
+            'slug' => $this->slug,
+        ];
+    }
+
     protected $fillable = [
         'name',
         'slug',
