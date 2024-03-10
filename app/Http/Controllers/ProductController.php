@@ -25,11 +25,6 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        if ($request->price <= 100) {
-            throw ValidationException::withMessages([
-                'price' => 'Your price is too low. Minimum price is 101.'
-            ]);
-        }
         $product = Product::create([
             'name' => $request->name,
             'description' => $request->description,
@@ -54,9 +49,20 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductRequest $request, Product $product)
     {
-        //
+       
+       $product->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'price' => $request->price,
+            'category_id'=>$request->category_id,
+            'picture' => $request->file('picture')->store('public/images/products'),
+        ]);
+        return response()->json([
+            'message' => 'Product was created',
+            'product' => new ProductSingleResource($product)
+        ]);
     }
 
     /**
