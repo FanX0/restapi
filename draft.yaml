@@ -27,8 +27,6 @@ models:
     attribute_1: string
     attribute_2: string
     price: integer
-    relationships:
-      hasMany: Cart
   
   Cart:
     user_id: foreign
