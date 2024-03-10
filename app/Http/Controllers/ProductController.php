@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\ProductResource;
+use App\Http\Resources\ProductSingleResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return ProductResource::collection(Product::get());
+        return ProductResource::collection(Product::paginate(10));
     }
 
     /**
@@ -29,7 +30,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-       return $product;
+       return new ProductSingleResource($product);
     }
 
     /**
