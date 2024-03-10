@@ -6,12 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 class Product extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+   
 
     public static function booted() {
         static::creating(function (Product $product) {
@@ -52,5 +53,10 @@ class Product extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
+    }
+    public function getPicture($size = 400): string
+    {
+        return $this->picture !== null ? Storage::url($this->picture):
+        'https://placehold.co/' . $size . '/000000/FFFFFF/?font=source-sans-pro&text=' . $this->name;
     }
 }
