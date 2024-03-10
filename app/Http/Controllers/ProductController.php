@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductRequest;
 use App\Http\Resources\ProductResource;
 use App\Http\Resources\ProductSingleResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 
 class ProductController extends Controller
 {
@@ -20,9 +23,25 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        //
+        if ($request->price <= 100) {
+            throw ValidationException::withMessages([
+                'price' => 'Your price is too low. Minimum price is 101.'
+            ]);
+        }
+        $product = Product::create([
+            'name' => $request->name,
+            'slug' => strtolower(Str::slug($request->name .'-' . time())),
+            'description' => $request->description,
+            'price' => $request->price,
+            'category_id'=>$request->category_id,
+            'picture' => $request->file('picture')->store('public/images/products'),
+        ]);
+        return response()->json([
+            'message' => 'Product was created',
+            'product' => new ProductSingleResource($product)
+        ]);
     }
 
     /**
