@@ -22,7 +22,8 @@ class ProductSingleResource extends JsonResource
             'price'=>number_format($this->price,0,'.','.'),
             'actual_price'=>$this->price,
             'created'=>$this->created_at->format("d F, Y"),
-            'picture'=>$this->picture,
+            'picture' => $this->getPicture(),
+            'category'=>$this->category,
         ];
     }
 }
