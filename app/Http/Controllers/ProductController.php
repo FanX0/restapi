@@ -7,7 +7,7 @@ use App\Http\Resources\ProductResource;
 use App\Http\Resources\ProductSingleResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 
 class ProductController extends Controller
@@ -71,6 +71,10 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+        if ($product->picture) {
+            Storage::delete($product->picture);
+        }
+        $product->variations()->delete();
         $product->delete();
 
         return response()->json([
