@@ -6,12 +6,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-
+use Illuminate\Support\Str;
 class Product extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
+
+    public static function booted() {
+        static::creating(function (Product $product) {
+            $product->slug = strtolower(Str::slug($product->name .'-' . time()));
+        });
+    }
 
     public function getRouteKeyName()
     {

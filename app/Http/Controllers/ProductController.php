@@ -7,7 +7,7 @@ use App\Http\Resources\ProductResource;
 use App\Http\Resources\ProductSingleResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
+
 use Illuminate\Validation\ValidationException;
 
 class ProductController extends Controller
@@ -32,7 +32,6 @@ class ProductController extends Controller
         }
         $product = Product::create([
             'name' => $request->name,
-            'slug' => strtolower(Str::slug($request->name .'-' . time())),
             'description' => $request->description,
             'price' => $request->price,
             'category_id'=>$request->category_id,
