@@ -53,14 +53,15 @@ class ProductController extends Controller
     {
        
        $product->update([
+            'picture' => $request->file('picture')->store('public/images/products'),
             'name' => $request->name,
             'description' => $request->description,
             'price' => $request->price,
             'category_id'=>$request->category_id,
-            'picture' => $request->file('picture')->store('public/images/products'),
+          
         ]);
         return response()->json([
-            'message' => 'Product was created',
+            'message' => 'Product was Updated',
             'product' => new ProductSingleResource($product)
         ]);
     }
