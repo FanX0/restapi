@@ -21,6 +21,7 @@ class ProductResource extends JsonResource
             'price' => number_format($this->price, 2, '.', '.' ),
             'actual_price'=> $this->price,
             'category'=>$this->category,
+            'picture'=>$this->picture,
         ];
     }
 }
