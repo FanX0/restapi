@@ -1,0 +1,61 @@
+models:
+  User:
+    name: string
+    email: unique
+    password: string
+    relationships:
+      hasMany: Cart, Transaction, ShippingAddress
+
+  Category:
+    name: string
+    slug: string
+    relationships:
+      hasMany: Product
+
+  Product:
+    category_id: foreign
+    picture: string
+    name: string
+    slug: string
+    description: text
+    price: text
+    relationships:
+      hasMany: Variation
+
+  Variation:
+    product_id: foreign
+    attribute_1: string
+    attribute_2: string
+    price: integer
+  
+  Cart:
+    user_id: foreign
+    variation_id: foreign
+    quantity: integer
+    price: integer
+    placed_at: nullable timestamp
+
+  Transaction:
+    order_id: string
+    user_id: foreign
+    gross_amount: integer
+    shipping_information: string
+    # merchant_id: string
+    # payment_method: string
+    # status_message: string
+    # transaction_id: string
+    # transaction_status: string
+    # transaction_time: datetime
+    # settlement_time: datetime
+    # expiry_time: datetime
+    # fraud_status: string
+    # order_status: integer
+
+  ShippingAddress:
+    user_id: foreign
+    address1: string
+    address2: string
+    is_default: string
+    relationships:
+        hasOne: Transcation
+

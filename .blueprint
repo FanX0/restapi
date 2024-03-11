@@ -1,0 +1,31 @@
+created:
+    - database/factories/UserFactory.php
+    - database/factories/CategoryFactory.php
+    - database/factories/ProductFactory.php
+    - database/factories/VariationFactory.php
+    - database/factories/CartFactory.php
+    - database/factories/TransactionFactory.php
+    - database/factories/ShippingAddressFactory.php
+    - database/migrations/2024_03_10_170632_create_users_table.php
+    - database/migrations/2024_03_10_170633_create_categories_table.php
+    - database/migrations/2024_03_10_170634_create_products_table.php
+    - database/migrations/2024_03_10_170635_create_variations_table.php
+    - database/migrations/2024_03_10_170636_create_carts_table.php
+    - database/migrations/2024_03_10_170637_create_transactions_table.php
+    - database/migrations/2024_03_10_170638_create_shipping_addresses_table.php
+    - app/Models/User.php
+    - app/Models/Category.php
+    - app/Models/Product.php
+    - app/Models/Variation.php
+    - app/Models/Cart.php
+    - app/Models/Transaction.php
+    - app/Models/ShippingAddress.php
+models:
+    User: { name: string, email: unique, password: string, relationships: { hasMany: 'Cart, Transaction, ShippingAddress' } }
+    Category: { name: string, slug: string, relationships: { hasMany: Product } }
+    Product: { category_id: foreign, picture: string, name: string, slug: string, description: text, price: text, relationships: { hasMany: Variation } }
+    Variation: { product_id: foreign, attribute_1: string, attribute_2: string, price: integer }
+    Cart: { user_id: foreign, variation_id: foreign, quantity: integer, price: integer, placed_at: 'nullable timestamp' }
+    Transcation: { order_id: string, user_id: foreign, gross_amount: integer, shipping_information: string }
+    ShippingAddress: { user_id: foreign, address1: string, address2: string, is_default: string, relationships: { hasOne: Transcation } }
+    Transaction: { order_id: string, user_id: foreign, gross_amount: integer, shipping_information: string }
