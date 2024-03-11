@@ -59,4 +59,8 @@ class User extends Model
     {
         return $this->belongsToMany(Role::class, 'role_user');
     }
+    public function hasRole($role)
+    {
+        return $this->roles()->where('name', $role)->exists;
+    }
 }
