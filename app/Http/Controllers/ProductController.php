@@ -12,11 +12,19 @@ use Illuminate\Validation\ValidationException;
 
 class ProductController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->except(['index','show']);
+    }
+
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+       
         return ProductResource::collection(Product::paginate(10));
     }
 
@@ -25,6 +33,8 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
+        $this->authorize('if_moderator');
+        
         $product = Product::create([
             'name' => $request->name,
             'description' => $request->description,
@@ -51,8 +61,8 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, Product $product)
     {
-       
-       $product->update([
+        $this->authorize('if_admin');
+        $product->update([
             'picture' => $request->file('picture')->store('public/images/products'),
             'name' => $request->name,
             'description' => $request->description,

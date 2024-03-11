@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Model
 {
-    use HasFactory;
+    use HasFactory,HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -52,5 +53,14 @@ class User extends Model
     public function shippingAddresses(): HasMany
     {
         return $this->hasMany(ShippingAddress::class);
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'role_user');
+    }
+    public function hasRole($role)
+    {
+        return (bool) $this->roles()->where('name', $role)->first() ? true : false;
     }
 }
