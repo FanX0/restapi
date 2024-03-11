@@ -54,4 +54,9 @@ class User extends Model
     {
         return $this->hasMany(ShippingAddress::class);
     }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'role_user');
+    }
 }
