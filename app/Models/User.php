@@ -61,6 +61,6 @@ class User extends Model
     }
     public function hasRole($role)
     {
-        return $this->roles()->where('name', $role)->exists;
+        return (bool) $this->roles()->where('name', $role)->first() ? true : false;
     }
 }
